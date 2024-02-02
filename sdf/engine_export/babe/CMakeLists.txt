@@ -1,0 +1,11 @@
+set(BABE_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
+set(LuaIntf_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include/LuaIntf)
+if (ANDROID)
+    set(BABE_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/android/${ANDROID_ABI}/libbabe.so)
+elseif (MACOSX)
+    set(BABE_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/mac/libbabe.dylib)
+elseif (WINDOWS)
+    set(BABE_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/win32/libbabe.lib)
+endif()
+
+add_definitions(-DLUAINTF_HEADERS_ONLY)

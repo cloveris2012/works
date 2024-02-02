@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            Production(MavenPublication) {
+                from components.release
+                // 使用方引用 implementation 'cn.com.jack:mavendemo:2.7.0-SNAPSHOT'
+                groupId = "com.boyaa.engine.plugin"
+                artifactId = "skeleton"
+                version = "1.0.1"
+                // 上传source，这样使用放可以看到方法注释
+                artifact generateSourcesJar
+            }
+        }
+        repositories {
+            // 定义第二个 maven 仓库，名为 Nexus
+            maven {
+                // 必须显示指定 name
+                name = "nexus"
+                url = "http://192.168.200.199:8089/repository/maven-releases/"
+                credentials {
+                    username = "myc"
+                    password = "myc310????"
+                }
+            }
+        }
+    }
+}
+
+

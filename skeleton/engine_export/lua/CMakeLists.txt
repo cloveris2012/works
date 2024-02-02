@@ -1,0 +1,8 @@
+if (ANDROID)
+    set(LUA_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/android/${ANDROID_ABI}/liblua.so)
+elseif (MACOSX)
+    set(LUA_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/mac/liblua.dylib)
+elseif (WINDOWS)
+    set(LUA_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/libs/win32/lua.lib)
+endif()
+set(LUA_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)

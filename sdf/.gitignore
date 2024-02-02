@@ -1,0 +1,6 @@
+/build
+*.swp
+/.vs
+/build
+/platform/android/.gradle
+/platform/android/.idea

@@ -1,0 +1,6 @@
+/build/native/example.VC.VC.opendb
+build
+
+/build
+/platform/android/.gradle
+/platform/android/.idea
